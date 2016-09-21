@@ -1,0 +1,18 @@
+        Arrays.sort(nums);
+        //首先最左边定值 ,jk从两边向中间压缩
+        int i = 0;
+        List<List<Integer>> listList = new ArrayList<>();
+        while (i < nums.length - 2) {
+            int j = i + 1;
+            int k = nums.length - 1;
+            while (j < k) {
+                int result = nums[i] + nums[j] + nums[k];
+                if (result == 0) listList.add(Arrays.asList(nums[i], nums[j], nums[k]));
+                if (result <= 0)
+                    while (nums[j] == nums[++j] && j < k) ;
+                if (result >= 0)
+                    while (nums[k--] == nums[k] && j < k) ;
+            }
+            while (nums[i]==nums[++i] && i<nums.length-2);
+        }
+        return listList;

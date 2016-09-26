@@ -1,0 +1,29 @@
+ public int threeSumClosest(int[] nums, int target) {
+       Arrays.sort(nums);
+        int res = 0, gap = Integer.MAX_VALUE;
+        int i = 0;
+        while (i < nums.length - 2) {
+            int j=i+1;
+            int k = nums.length-1;
+            while(j<k){
+                int sum = nums[i]+nums[j]+nums[k];
+                if(sum==target)return sum;
+                //因为如果sum大于target，最右的下标要向左移来缩小sum向target靠近
+                else if(sum>target){
+                    if(Math.abs(sum-target)<gap){
+                        gap = Math.abs(sum-target);
+                        res = sum;
+                    }
+                    while (nums[k]==nums[--k] && j<k);
+                }else{
+                    if(Math.abs(sum-target)<gap){
+                        gap = Math.abs(sum-target);
+                        res = sum;
+                    }
+                    while (nums[j] == nums[++j] && j<k);
+                }
+            }
+            while (nums[i]==nums[++i] && i<nums.length-2);
+        }
+        return res;
+    }

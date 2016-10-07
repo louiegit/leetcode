@@ -1,0 +1,19 @@
+    public List<String> letterCombinations(String digits) {
+        if (digits.length() < 1) {
+            return new ArrayList<>();
+        }
+        LinkedList<String> res = new LinkedList<>();
+        res.add("");
+        for (int i = 0; i < digits.length(); i++) {
+            int x = Character.getNumericValue(digits.charAt(i));
+            //看list的firstnode是否达到必须的长度i , while的作用是遍历res自身的node
+            while (res.peek().length() == i) {
+                // 把firstnode取出来，拼接再添加上去
+                String tmp = res.remove();
+                for (char s : phone[x].toCharArray()) {
+                    res.add(tmp + s);
+                }
+            }
+        }
+        return res;
+    }
